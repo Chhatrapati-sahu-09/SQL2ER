@@ -5,27 +5,21 @@ export default function Diagram({ code }) {
   const ref = useRef(null);
 
   useEffect(() => {
+    if (!code) return;
+
     mermaid.initialize({
-      startOnLoad: true,
+      startOnLoad: false,
       theme: "dark",
-      themeVariables: {
-        darkMode: true,
-        primaryColor: "#1E90FF",
-        primaryTextColor: "#FFFFFF",
-        primaryBorderColor: "#00C6FF",
-        lineColor: "#00C6FF",
-        tertiaryColor: "#1A2238",
-        background: "#0B0F19",
-        mainBkg: "#121826",
-        secondBkg: "#1A2238",
-      },
     });
 
-    if (ref.current) {
-      ref.current.innerHTML = code;
-      mermaid.contentLoaded();
-    }
+    const id = "mermaid-diagram-" + Date.now();
+
+    mermaid.render(id, code).then(({ svg }) => {
+      if (ref.current) {
+        ref.current.innerHTML = svg;
+      }
+    });
   }, [code]);
 
-  return <div ref={ref} className="mermaid" />;
+  return <div ref={ref}></div>;
 }

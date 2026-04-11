@@ -151,7 +151,7 @@ function convertToMermaid(parsed) {
       output += `        ${col.type} ${col.name} ${col.key}\n`;
     });
 
-    output += "    }\n";
+    output += "    }\n\n";
   }
 
   relations.forEach((rel) => {
