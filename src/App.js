@@ -84,12 +84,14 @@ function parseSQL(sql) {
 function App() {
   const [sql, setSql] = useState("");
   const [diagram, setDiagram] = useState("");
+  const [error, setError] = useState("");
   const fileInputRef = useRef(null);
 
   function readSqlFile(file) {
     const reader = new FileReader();
     reader.onload = (event) => {
       setSql(event.target?.result || "");
+      setError("");
     };
     reader.readAsText(file);
   }
@@ -115,9 +117,26 @@ function App() {
   }
 
   const generateDiagram = () => {
-    const parsed = parseSQL(sql);
-    const mermaidCode = convertToMermaid(parsed);
-    setDiagram(mermaidCode);
+    try {
+      if (!sql.trim()) {
+        setError("Please enter SQL");
+        return;
+      }
+
+      const parsed = parseSQL(sql);
+
+      if (Object.keys(parsed.tables).length === 0) {
+        setError("No valid tables found");
+        return;
+      }
+
+      const mermaidCode = convertToMermaid(parsed);
+
+      setDiagram(mermaidCode);
+      setError("");
+    } catch (err) {
+      setError("Invalid SQL format");
+    }
   };
 
   return (
@@ -146,6 +165,7 @@ function App() {
       />
 
       <button onClick={generateDiagram}>Generate Diagram</button>
+      {error && <p style={{ color: "red" }}>{error}</p>}
 
       <Diagram code={diagram} />
     </div>
