@@ -23,7 +23,7 @@ function parseSQL(sql) {
       if (!line) return;
 
       if (/FOREIGN KEY/i.test(line)) {
-        const fkMatch = line.match(/\((.*?)\)/);
+        const createTableRegex = /CREATE TABLE\s+(\w+)\s*\(([\s\S]*?)\);/gi;
         const refMatch = line.match(/REFERENCES\s+(\w+)\((.*?)\)/i);
 
         if (fkMatch && refMatch) {
@@ -32,14 +32,16 @@ function parseSQL(sql) {
             to: refMatch[1],
           });
 
-          tables[tableName].push({
-            name: fkMatch[1],
+          // Split safely (handles commas inside constraints)
+          const lines = body.split(/,(?![^\(]*\))/);
             type: "INT",
             key: "FK",
           });
+            if (!line) return;
         }
-      } else if (/PRIMARY KEY\s*\(/i.test(line)) {
-        return;
+            // FOREIGN KEY
+            if (/FOREIGN KEY/i.test(line)) {
+              const fkMatch = line.match(/\((.*?)\)/);
       } else {
         const parts = line.split(/\s+/);
         const colName = parts[0];
@@ -55,17 +57,13 @@ function parseSQL(sql) {
           key: key.trim(),
         });
       }
-    });
-  }
 
   return { tables, relations };
 }
-
-function convertToMermaid(parsed) {
   let output = "erDiagram\n";
 
   const { tables, relations } = parsed;
-
+              const colType = parts[1] || "STRING";
   Object.entries(tables).forEach(([table, columns]) => {
     output += `    ${table.toUpperCase()} {\n`;
 
@@ -74,7 +72,7 @@ function convertToMermaid(parsed) {
     });
 
     output += "    }\n\n";
-  });
+                key,
 
   relations.forEach((rel) => {
     output += `    ${rel.to.toUpperCase()} ||--o{ ${rel.from.toUpperCase()} : has\n`;
