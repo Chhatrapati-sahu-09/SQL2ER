@@ -15,15 +15,16 @@ function parseSQL(sql) {
 
     tables[tableName] = [];
 
-    // Split safely, preserving commas inside parentheses.
+    // Split safely (handles commas inside constraints)
     const lines = body.split(/,(?![^()]*\))/);
 
     lines.forEach((line) => {
       line = line.trim();
       if (!line) return;
 
+      // FOREIGN KEY
       if (/FOREIGN KEY/i.test(line)) {
-        const createTableRegex = /CREATE TABLE\s+(\w+)\s*\(([\s\S]*?)\);/gi;
+        const fkMatch = line.match(/\((.*?)\)/);
         const refMatch = line.match(/REFERENCES\s+(\w+)\((.*?)\)/i);
 
         if (fkMatch && refMatch) {
@@ -32,17 +33,19 @@ function parseSQL(sql) {
             to: refMatch[1],
           });
 
-          // Split safely (handles commas inside constraints)
-          const lines = body.split(/,(?![^\(]*\))/);
+          tables[tableName].push({
+            name: fkMatch[1],
             type: "INT",
             key: "FK",
           });
-            if (!line) return;
         }
-            // FOREIGN KEY
-            if (/FOREIGN KEY/i.test(line)) {
-              const fkMatch = line.match(/\((.*?)\)/);
-      } else {
+      }
+      // Skip table-level constraints
+      else if (/PRIMARY KEY\s*\(/i.test(line)) {
+        return;
+      }
+      // COLUMN
+      else {
         const parts = line.split(/\s+/);
         const colName = parts[0];
         const colType = parts[1] || "STRING";
@@ -57,13 +60,17 @@ function parseSQL(sql) {
           key: key.trim(),
         });
       }
+    });
+  }
 
   return { tables, relations };
 }
+
+function convertToMermaid(parsed) {
   let output = "erDiagram\n";
 
   const { tables, relations } = parsed;
-              const colType = parts[1] || "STRING";
+
   Object.entries(tables).forEach(([table, columns]) => {
     output += `    ${table.toUpperCase()} {\n`;
 
@@ -72,7 +79,7 @@ function parseSQL(sql) {
     });
 
     output += "    }\n\n";
-                key,
+  });
 
   relations.forEach((rel) => {
     output += `    ${rel.to.toUpperCase()} ||--o{ ${rel.from.toUpperCase()} : has\n`;
@@ -131,7 +138,6 @@ function App() {
       }
 
       const mermaidCode = convertToMermaid(parsed);
-
       setDiagram(mermaidCode);
       setError("");
     } catch (err) {
