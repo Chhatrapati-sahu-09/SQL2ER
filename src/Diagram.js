@@ -41,6 +41,7 @@ export default function Diagram({ code }) {
   return (
     <div
       ref={containerRef}
+      className="mermaid-container"
       style={{
         overflow: "hidden",
         border: "1px solid #1e293b",

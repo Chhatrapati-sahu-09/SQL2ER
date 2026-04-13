@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import html2canvas from "html2canvas";
 import Diagram from "./Diagram";
 import "./App.css";
 
@@ -145,6 +146,18 @@ function App() {
     }
   };
 
+  function exportPNG() {
+    const element = document.querySelector(".mermaid-container");
+    if (!element) return;
+
+    html2canvas(element).then((canvas) => {
+      const link = document.createElement("a");
+      link.download = "schema.png";
+      link.href = canvas.toDataURL();
+      link.click();
+    });
+  }
+
   return (
     <div className="container">
       <h1>SchemaViz</h1>
@@ -171,6 +184,7 @@ function App() {
       />
 
       <button onClick={generateDiagram}>Generate Diagram</button>
+      <button onClick={exportPNG}>Export PNG</button>
       {error && <p style={{ color: "red" }}>{error}</p>}
 
       <Diagram code={diagram} />
