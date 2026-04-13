@@ -168,7 +168,12 @@ function App() {
 
   return (
     <div className="container">
-      <h1>SchemaViz</h1>
+      <div className="brand">
+        <img src="/sql2erlogo.png" alt="SQL2ER logo" className="brand-logo" />
+        <p className="brand-tagline">
+          Convert SQL schemas into ER diagrams instantly.
+        </p>
+      </div>
 
       <div
         className="drop-zone"
