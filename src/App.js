@@ -158,6 +158,14 @@ function App() {
     });
   }
 
+  function copyShare() {
+    const encoded = btoa(unescape(encodeURIComponent(sql)));
+    const link = `${window.location.origin}?data=${encoded}`;
+
+    navigator.clipboard.writeText(link);
+    alert("Link copied!");
+  }
+
   return (
     <div className="container">
       <h1>SchemaViz</h1>
@@ -183,8 +191,11 @@ function App() {
         onChange={(e) => setSql(e.target.value)}
       />
 
-      <button onClick={generateDiagram}>Generate Diagram</button>
-      <button onClick={exportPNG}>Export PNG</button>
+      <div className="toolbar">
+        <button onClick={generateDiagram}>Generate</button>
+        <button onClick={exportPNG}>Export PNG</button>
+        <button onClick={copyShare}>Share</button>
+      </div>
       {error && <p style={{ color: "red" }}>{error}</p>}
 
       <Diagram code={diagram} />
