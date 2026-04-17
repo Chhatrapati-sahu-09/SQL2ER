@@ -2,74 +2,107 @@
 
 # SQL2ER
 
-Convert SQL table definitions into interactive ER diagrams in seconds.
+> Convert SQL table definitions into interactive ER diagrams instantly.
 
-<img src="https://skillicons.dev/icons?i=react,js,html,css,nodejs,npm" />
+<p align="left">
+  <img src="https://skillicons.dev/icons?i=react,js,html,css,nodejs,npm" />
+</p>
 
-## Project Overview
+<p align="left">
+  <img src="https://img.shields.io/badge/Frontend-React-blue" />
+  <img src="https://img.shields.io/badge/Parser-node--sql--parser-green" />
+  <img src="https://img.shields.io/badge/Diagram-Mermaid-purple" />
+  <img src="https://img.shields.io/badge/Export-html2canvas-orange" />
+  <img src="https://img.shields.io/badge/License-MIT-yellow" />
+</p>
 
-SQL2ER is a React app that helps you visualize database structure quickly by turning SQL `CREATE TABLE` statements into Mermaid ER diagrams.
+---
 
-### Key Features
+## Overview
 
-- Paste SQL directly or upload a `.sql` file.
-- Parse table columns and foreign key relations.
-- Generate Mermaid ER code from SQL schema.
-- Render diagrams in-browser with pan and zoom.
-- Export rendered diagram as PNG.
-- Copy shareable links with encoded SQL input.
+SQL2ER is a developer-oriented tool that converts SQL `CREATE TABLE` statements into structured and interactive ER diagrams.
+It simplifies database visualization and helps developers understand schema relationships without manual diagram creation.
 
-## Tech Stack
+---
 
-- React 19
-- Mermaid 11
-- node-sql-parser
-- html2canvas
-- Create React App
+## Features
 
-## Architecture
+* SQL input via paste or `.sql` file upload
+* Automatic parsing of tables, columns, and relationships
+* Foreign key relationship detection and mapping
+* Dynamic ER diagram generation using Mermaid
+* Zoom and pan for navigating large schemas
+* Export diagrams as PNG images
+* Shareable links with encoded SQL input
+* Error handling for invalid SQL
+
+---
+
+## Technical Details
+
+### Tech Stack
+
+* **Frontend:** React, JavaScript, HTML, CSS
+* **Parsing Engine:** node-sql-parser (AST-based SQL parsing)
+* **Visualization:** Mermaid.js
+* **Utilities:** html2canvas, panzoom
+* **Tooling:** Create React App, npm
+
+---
+
+### Architecture
 
 ```mermaid
 flowchart LR
-		A[SQL Input\nPaste or Upload] --> B[SQL Parser\nparseSQL]
-		B --> C[Mermaid ER Builder\nconvertToMermaid]
-		C --> D[Diagram Renderer\nDiagram Component]
-		D --> E[Pan and Zoom]
-		D --> F[Export PNG]
-		A --> G[Share Link Encoder]
+    A[SQL Input] --> B[SQL Parser]
+    B --> C[Mermaid Generator]
+    C --> D[Diagram Renderer]
+    D --> E[Zoom and Pan]
+    D --> F[Export PNG]
+    A --> G[Share Link Encoder]
 ```
 
-## Example ER Diagram
+---
+
+## Example Output
 
 ```mermaid
 erDiagram
-		USERS {
-				INT id PK
-				VARCHAR name
-				VARCHAR email UQ
-		}
+    USERS {
+        INT id PK
+        VARCHAR name
+        VARCHAR email UQ
+    }
 
-		ORDERS {
-				INT id PK
-				INT user_id FK
-				DECIMAL total
-		}
+    ORDERS {
+        INT id PK
+        INT user_id FK
+        DECIMAL total
+    }
 
-		USERS ||--o{ ORDERS : has
+    USERS ||--o{ ORDERS : has
 ```
+
+---
 
 ## Getting Started
 
 ### Prerequisites
 
-- Node.js 18+
-- npm 9+
+* Node.js 18+
+* npm 9+
 
-### Install
+---
+
+### Installation
 
 ```bash
+git clone https://github.com/Chhatrapati-sahu-09/SQL2ER.git
+cd SQL2ER
 npm install
 ```
+
+---
 
 ### Run Locally
 
@@ -77,77 +110,87 @@ npm install
 npm start
 ```
 
-Open `http://localhost:3000` in your browser.
+Open: http://localhost:3000
 
-### Build
+---
+
+### Build for Production
 
 ```bash
 npm run build
 ```
 
-## How To Use
+---
 
-1. Paste SQL or upload a `.sql` file.
-2. Click Generate.
-3. Explore the ER diagram using drag and wheel zoom.
-4. Export PNG or click Share to copy a link.
+## Usage
 
-## Supported SQL Pattern
+1. Paste SQL or upload a `.sql` file
+2. Click **Generate**
+3. Explore the ER diagram using zoom and drag
+4. Export as PNG or generate a shareable link
 
-The current parser focuses on practical `CREATE TABLE` syntax with inline and table-level foreign key references.
+---
+
+## Supported SQL
+
+The parser supports common `CREATE TABLE` syntax with primary and foreign key constraints.
 
 ```sql
 CREATE TABLE users (
-	id INT PRIMARY KEY,
-	name VARCHAR(100),
-	email VARCHAR(120) UNIQUE
+  id INT PRIMARY KEY,
+  name VARCHAR(100),
+  email VARCHAR(120) UNIQUE
 );
 
 CREATE TABLE orders (
-	id INT PRIMARY KEY,
-	user_id INT,
-	FOREIGN KEY (user_id) REFERENCES users(id)
+  id INT PRIMARY KEY,
+  user_id INT,
+  FOREIGN KEY (user_id) REFERENCES users(id)
 );
 ```
 
-## Scripts
+---
 
-- `npm start` starts development server
-- `npm run build` creates production build
-- `npm test` runs test runner
-- `npm run eject` ejects CRA config
+## Project Structure
+
+```
+src/
+ ├── components/
+ │   ├── Diagram.js
+ │
+ ├── App.js
+ ├── App.css
+ └── index.js
+```
+
+---
 
 ## Roadmap
 
-- Better SQL dialect coverage
-- Relationship labels from constraints
-- SVG export option
-- Theme switch for diagram rendering
+* Extended SQL dialect support
+* Relationship labeling improvements
+* SVG export support
+* Theme customization
 
-## Repository
+---
 
-- Owner: Chhatrapati-sahu-09
-- Repository: SQL2ER
-- Branch: main
+## Author
+
+Chhatrapati Sahu
+GitHub: https://github.com/Chhatrapati-sahu-09
+
+---
 
 ## License
 
-MIT
+MIT License
 
-## Docs Micro-Update Log
+---
 
-- v1: README rewritten for project-specific documentation.
-- v$i: small README polish update.
-- v3: small README polish update.
-- v4: small README polish update.
-- v5: small README polish update.
-- v6: small README polish update.
-- v7: small README polish update.
-- v8: small README polish update.
-- v9: small README polish update.
-- v10: small README polish update.
-- v11: small README polish update.
-- v12: small README polish update.
-- v13: small README polish update.
-- v14: small README polish update.
-- v15: small README polish update.
+## Acknowledgements
+
+* Mermaid.js for diagram rendering
+* node-sql-parser for SQL parsing
+* Open-source ecosystem for supporting tools
+
+---
