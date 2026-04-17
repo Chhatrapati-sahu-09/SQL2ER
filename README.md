@@ -146,3 +146,4 @@ MIT
 - v4: small README polish update. 
 - v5: small README polish update. 
 - v6: small README polish update. 
+- v7: small README polish update. 
