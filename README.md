@@ -4,11 +4,7 @@
 
 Convert SQL table definitions into interactive ER diagrams in seconds.
 
-![React](https://img.shields.io/badge/Frontend-React-61DAFB?logo=react&logoColor=white)
-![Mermaid](https://img.shields.io/badge/Diagram-Mermaid-FF3670?logo=mermaid&logoColor=white)
-![Parser](https://img.shields.io/badge/Parser-node--sql--parser-3C873A?logo=nodedotjs&logoColor=white)
-![Export](https://img.shields.io/badge/Export-PNG-0EA5E9?logo=files&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-111827?logo=opensourceinitiative&logoColor=white)
+<img src="https://skillicons.dev/icons?i=react,js,html,css,nodejs,npm" />
 
 ## Project Overview
 
@@ -142,16 +138,16 @@ MIT
 
 - v1: README rewritten for project-specific documentation.
 - v$i: small README polish update.
-- v3: small README polish update. 
-- v4: small README polish update. 
-- v5: small README polish update. 
-- v6: small README polish update. 
-- v7: small README polish update. 
-- v8: small README polish update. 
-- v9: small README polish update. 
-- v10: small README polish update. 
-- v11: small README polish update. 
-- v12: small README polish update. 
-- v13: small README polish update. 
-- v14: small README polish update. 
+- v3: small README polish update.
+- v4: small README polish update.
+- v5: small README polish update.
+- v6: small README polish update.
+- v7: small README polish update.
+- v8: small README polish update.
+- v9: small README polish update.
+- v10: small README polish update.
+- v11: small README polish update.
+- v12: small README polish update.
+- v13: small README polish update.
+- v14: small README polish update.
 - v15: small README polish update.
