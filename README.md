@@ -20,7 +20,7 @@
 
 ## Overview
 
-SQL2ER is a developer-oriented tool that converts SQL `CREATE TABLE` statements into structured and interactive ER diagrams.
+SQL2ER is a developer-focused tool that converts SQL `CREATE TABLE` statements into structured and interactive ER diagrams.
 It simplifies database visualization and helps developers understand schema relationships without manual diagram creation.
 
 ---
@@ -69,19 +69,21 @@ flowchart LR
 ```mermaid
 erDiagram
     USERS {
-        INT id PK
+        INT id
         VARCHAR name
-        VARCHAR email UQ
+        VARCHAR email
     }
 
     ORDERS {
-        INT id PK
-        INT user_id FK
+        INT id
+        INT user_id
         DECIMAL total
     }
 
     USERS ||--o{ ORDERS : has
 ```
+
+> Note: Primary and foreign key indicators are handled internally in the application but omitted here for GitHub compatibility.
 
 ---
 
@@ -133,7 +135,7 @@ npm run build
 
 ## Supported SQL
 
-The parser supports common `CREATE TABLE` syntax with primary and foreign key constraints.
+Optimized for common `CREATE TABLE` statements with primary and foreign key constraints.
 
 ```sql
 CREATE TABLE users (
