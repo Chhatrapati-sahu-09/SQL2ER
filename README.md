@@ -1,72 +1,143 @@
 ![SQL2ER Banner](public/banner.png)
 
-# Getting Started with Create React App
+# SQL2ER
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Convert SQL table definitions into interactive ER diagrams in seconds.
 
-## Available Scripts
+![React](https://img.shields.io/badge/Frontend-React-61DAFB?logo=react&logoColor=white)
+![Mermaid](https://img.shields.io/badge/Diagram-Mermaid-FF3670?logo=mermaid&logoColor=white)
+![Parser](https://img.shields.io/badge/Parser-node--sql--parser-3C873A?logo=nodedotjs&logoColor=white)
+![Export](https://img.shields.io/badge/Export-PNG-0EA5E9?logo=files&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-111827?logo=opensourceinitiative&logoColor=white)
 
-In the project directory, you can run:
+## Project Overview
 
-### `npm start`
+SQL2ER is a React app that helps you visualize database structure quickly by turning SQL `CREATE TABLE` statements into Mermaid ER diagrams.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Key Features
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Paste SQL directly or upload a `.sql` file.
+- Parse table columns and foreign key relations.
+- Generate Mermaid ER code from SQL schema.
+- Render diagrams in-browser with pan and zoom.
+- Export rendered diagram as PNG.
+- Copy shareable links with encoded SQL input.
 
-### `npm test`
+## Tech Stack
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- React 19
+- Mermaid 11
+- node-sql-parser
+- html2canvas
+- Create React App
 
-### `npm run build`
+## Architecture
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```mermaid
+flowchart LR
+		A[SQL Input\nPaste or Upload] --> B[SQL Parser\nparseSQL]
+		B --> C[Mermaid ER Builder\nconvertToMermaid]
+		C --> D[Diagram Renderer\nDiagram Component]
+		D --> E[Pan and Zoom]
+		D --> F[Export PNG]
+		A --> G[Share Link Encoder]
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Example ER Diagram
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```mermaid
+erDiagram
+		USERS {
+				INT id PK
+				VARCHAR name
+				VARCHAR email UQ
+		}
 
-### `npm run eject`
+		ORDERS {
+				INT id PK
+				INT user_id FK
+				DECIMAL total
+		}
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+		USERS ||--o{ ORDERS : has
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Getting Started
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Prerequisites
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- Node.js 18+
+- npm 9+
 
-## Learn More
+### Install
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+npm install
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Run Locally
 
-### Code Splitting
+```bash
+npm start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Open `http://localhost:3000` in your browser.
 
-### Analyzing the Bundle Size
+### Build
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```bash
+npm run build
+```
 
-### Making a Progressive Web App
+## How To Use
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+1. Paste SQL or upload a `.sql` file.
+2. Click Generate.
+3. Explore the ER diagram using drag and wheel zoom.
+4. Export PNG or click Share to copy a link.
 
-### Advanced Configuration
+## Supported SQL Pattern
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+The current parser focuses on practical `CREATE TABLE` syntax with inline and table-level foreign key references.
 
-### Deployment
+```sql
+CREATE TABLE users (
+	id INT PRIMARY KEY,
+	name VARCHAR(100),
+	email VARCHAR(120) UNIQUE
+);
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+CREATE TABLE orders (
+	id INT PRIMARY KEY,
+	user_id INT,
+	FOREIGN KEY (user_id) REFERENCES users(id)
+);
+```
 
-### `npm run build` fails to minify
+## Scripts
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- `npm start` starts development server
+- `npm run build` creates production build
+- `npm test` runs test runner
+- `npm run eject` ejects CRA config
+
+## Roadmap
+
+- Better SQL dialect coverage
+- Relationship labels from constraints
+- SVG export option
+- Theme switch for diagram rendering
+
+## Repository
+
+- Owner: Chhatrapati-sahu-09
+- Repository: SQL2ER
+- Branch: main
+
+## License
+
+MIT
+
+## Docs Micro-Update Log
+
+- v1: README rewritten for project-specific documentation.
