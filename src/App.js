@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import html2canvas from "html2canvas";
 import Diagram from "./Diagram";
 import "./App.css";
@@ -53,7 +53,7 @@ function parseSQL(sql) {
 
         let key = "";
         if (/PRIMARY KEY/i.test(line)) key += "PK";
-        if (/UNIQUE/i.test(line)) key += " UQ";
+        if (/UNIQUE/i.test(line)) key += " UK";
 
         tables[tableName].push({
           name: colName,
@@ -67,23 +67,48 @@ function parseSQL(sql) {
   return { tables, relations };
 }
 
+function toMermaidWord(value, { upper = false } = {}) {
+  const cleaned = String(value || "")
+    .replace(/\[|\]|`|"|'/g, "")
+    .replace(/[^A-Za-z0-9_]/g, "_")
+    .replace(/_+/g, "_")
+    .replace(/^_+|_+$/g, "");
+
+  const safeValue = cleaned || "UNKNOWN";
+  return upper ? safeValue.toUpperCase() : safeValue;
+}
+
+function toMermaidType(sqlType) {
+  const baseType =
+    String(sqlType || "STRING")
+      .split("(")[0]
+      .trim() || "STRING";
+  return toMermaidWord(baseType, { upper: true });
+}
+
 function convertToMermaid(parsed) {
   let output = "erDiagram\n";
 
   const { tables, relations } = parsed;
 
   Object.entries(tables).forEach(([table, columns]) => {
-    output += `    ${table.toUpperCase()} {\n`;
+    const tableName = toMermaidWord(table, { upper: true });
+    output += `    ${tableName} {\n`;
 
     columns.forEach((col) => {
-      output += `        ${col.type} ${col.name} ${col.key}\n`;
+      const columnType = toMermaidType(col.type);
+      const columnName = toMermaidWord(col.name);
+      const keySuffix = col.key ? ` ${col.key}` : "";
+      output += `        ${columnType} ${columnName}${keySuffix}\n`;
     });
 
     output += "    }\n\n";
   });
 
   relations.forEach((rel) => {
-    output += `    ${rel.to.toUpperCase()} ||--o{ ${rel.from.toUpperCase()} : has\n`;
+    const toTable = toMermaidWord(rel.to, { upper: true });
+    const fromTable = toMermaidWord(rel.from, { upper: true });
+    output += `    ${toTable} ||--o{ ${fromTable} : has\n`;
   });
 
   return output;
@@ -124,10 +149,11 @@ function App() {
     fileInputRef.current?.click();
   }
 
-  const generateDiagram = () => {
+  const generateDiagram = useCallback(() => {
     try {
       if (!sql.trim()) {
         setError("Please enter SQL");
+        setDiagram("");
         return;
       }
 
@@ -144,7 +170,23 @@ function App() {
     } catch (err) {
       setError("Invalid SQL format");
     }
-  };
+  }, [sql]);
+
+  useEffect(() => {
+    const trimmedSql = sql.trim();
+
+    if (!trimmedSql) {
+      setDiagram("");
+      setError("");
+      return;
+    }
+
+    const timer = setTimeout(() => {
+      generateDiagram();
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [sql, generateDiagram]);
 
   function exportPNG() {
     const element = document.querySelector(".mermaid-container");
