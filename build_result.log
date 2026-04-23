@@ -1,0 +1,83 @@
+
+> er-visualizer@0.1.0 build
+> react-scripts build
+
+Creating an optimized production build...
+Compiled with warnings.
+
+[eslint] 
+src\App.js
+  Line 164:6:  React Hook useEffect has a missing dependency: 'generateDiagram'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src\Diagram.js
+  Line 86:22:  The ref value 'containerRef.current' will likely have changed by the time this effect cleanup function runs. If this ref points to a node rendered by React, copy 'containerRef.current' to a variable inside the effect, and use that variable in the cleanup function  react-hooks/exhaustive-deps
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+File sizes after gzip:
+
+  270.92 kB  build\static\js\main.1d5013e9.js
+  135.31 kB  build\static\js\646.892766e8.chunk.js
+  106.54 kB  build\static\js\502.e1f30386.chunk.js
+  75.55 kB   build\static\js\349.86c10b5a.chunk.js
+  40.38 kB   build\static\js\647.59721ad2.chunk.js
+  31.15 kB   build\static\js\131.180328c8.chunk.js
+  21.47 kB   build\static\js\195.6b69dbf7.chunk.js
+  20.37 kB   build\static\js\833.ba0a376e.chunk.js
+  20.05 kB   build\static\js\585.037bf5d4.chunk.js
+  19.95 kB   build\static\js\366.0427504e.chunk.js
+  16.13 kB   build\static\js\876.ac49d122.chunk.js
+  16.05 kB   build\static\js\531.92237908.chunk.js
+  15.04 kB   build\static\js\603.5b931724.chunk.js
+  12.17 kB   build\static\js\675.2d8f4d55.chunk.js
+  11.11 kB   build\static\js\590.d873faa9.chunk.js
+  10.82 kB   build\static\js\249.5c147072.chunk.js
+  10.06 kB   build\static\js\633.d92ee9d3.chunk.js
+  10.04 kB   build\static\js\171.2cbfe6c1.chunk.js
+  9.76 kB    build\static\js\443.8a80b974.chunk.js
+  9.69 kB    build\static\js\999.1faac18c.chunk.js
+  8.99 kB    build\static\js\75.2bf56a0c.chunk.js
+  8.78 kB    build\static\js\566.7a3657de.chunk.js
+  8.37 kB    build\static\js\774.c4be8895.chunk.js
+  7.93 kB    build\static\js\722.bae0e01d.chunk.js
+  7.26 kB    build\static\js\385.1d5ac22d.chunk.js
+  6.58 kB    build\static\js\354.a20ad10b.chunk.js
+  6.48 kB    build\static\js\267.e01dd9c5.chunk.js
+  4.15 kB    build\static\js\456.c2a901ae.chunk.js
+  4.09 kB    build\static\js\478.f4f14579.chunk.js
+  4.02 kB    build\static\js\571.7d63f892.chunk.js
+  3.63 kB    build\static\js\760.464df1bf.chunk.js
+  3.3 kB     build\static\js\532.e3ce7bb8.chunk.js
+  2.53 kB    build\static\js\806.0e825072.chunk.js
+  2 kB       build\static\js\630.2153c952.chunk.js
+  1.9 kB     build\static\js\376.97968018.chunk.js
+  1.57 kB    build\static\js\578.54f5ac0b.chunk.js
+  1.17 kB    build\static\css\main.a515bef9.css
+  453 B      build\static\js\861.691174c8.chunk.js
+  346 B      build\static\js\555.4ecd49aa.chunk.js
+  346 B      build\static\js\645.5178b8db.chunk.js
+  338 B      build\static\js\83.6e0b0390.chunk.js
+  160 B      build\static\js\765.932df536.chunk.js
+  159 B      build\static\js\898.689be05b.chunk.js
+  159 B      build\static\js\710.a8f01e6e.chunk.js
+  158 B      build\static\js\631.9d157cd9.chunk.js
+  158 B      build\static\js\537.d0a054ac.chunk.js
+  157 B      build\static\js\3.e0a65180.chunk.js
+  156 B      build\static\js\811.3d6372fc.chunk.js
+  155 B      build\static\js\25.b49905ee.chunk.js
+  155 B      build\static\js\276.e3006d03.chunk.js
+
+The project was built assuming it is hosted at /.
+You can control this with the homepage field in your package.json.
+
+The build folder is ready to be deployed.
+You may serve it with a static server:
+
+  npm install -g serve
+  serve -s build
+
+Find out more about deployment here:
+
+  https://cra.link/deployment
+
