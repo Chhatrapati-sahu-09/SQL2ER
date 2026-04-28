@@ -27,26 +27,32 @@ It simplifies database visualization and helps developers understand schema rela
 
 ## Features
 
-* SQL input via paste or `.sql` file upload
-* Automatic parsing of tables, columns, and relationships
-* Foreign key relationship detection and mapping
-* Dynamic ER diagram generation using Mermaid
-* Zoom and pan for navigating large schemas
-* Export diagrams as PNG images
-* Shareable links with encoded SQL input
-* Error handling for invalid SQL
+- SQL input via paste or `.sql` file upload
+- Automatic parsing of tables, columns, and relationships
+- Foreign key relationship detection and mapping
+- Dynamic ER diagram generation using Mermaid
+- Zoom and pan for navigating large schemas
+- Export diagrams as PNG images
+- Shareable links with encoded SQL input
+- Error handling for invalid SQL
 
----
+## Screenshots
+
+<p align="center">
+  <img src="public/Screenshot 2026-04-25 231331.png" alt="Screenshot 1" width="350"/>
+  <img src="public/Screenshot 2026-04-25 231338.png" alt="Screenshot 2" width="350"/>
+  <img src="public/Screenshot 2026-04-25 231414.png" alt="Screenshot 3" width="350"/>
+</p>
 
 ## Technical Details
 
 ### Tech Stack
 
-* **Frontend:** React, JavaScript, HTML, CSS
-* **Parsing Engine:** node-sql-parser (AST-based SQL parsing)
-* **Visualization:** Mermaid.js
-* **Utilities:** html2canvas, panzoom
-* **Tooling:** Create React App, npm
+- **Frontend:** React, JavaScript, HTML, CSS
+- **Parsing Engine:** node-sql-parser (AST-based SQL parsing)
+- **Visualization:** Mermaid.js
+- **Utilities:** html2canvas, panzoom
+- **Tooling:** Create React App, npm
 
 ---
 
@@ -91,8 +97,8 @@ erDiagram
 
 ### Prerequisites
 
-* Node.js 18+
-* npm 9+
+- Node.js 18+
+- npm 9+
 
 ---
 
@@ -169,10 +175,10 @@ src/
 
 ## Roadmap
 
-* Extended SQL dialect support
-* Relationship labeling improvements
-* SVG export support
-* Theme customization
+- Extended SQL dialect support
+- Relationship labeling improvements
+- SVG export support
+- Theme customization
 
 ---
 
@@ -191,8 +197,8 @@ MIT License
 
 ## Acknowledgements
 
-* Mermaid.js for diagram rendering
-* node-sql-parser for SQL parsing
-* Open-source ecosystem for supporting tools
+- Mermaid.js for diagram rendering
+- node-sql-parser for SQL parsing
+- Open-source ecosystem for supporting tools
 
 ---
