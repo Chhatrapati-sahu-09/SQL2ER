@@ -46,13 +46,37 @@ It simplifies database visualization and helps developers understand schema rela
 
 ## Technical Details
 
-### Tech Stack
+## Tech Stack
 
-- **Frontend:** React, JavaScript, HTML, CSS
-- **Parsing Engine:** node-sql-parser (AST-based SQL parsing)
-- **Visualization:** Mermaid.js
-- **Utilities:** html2canvas, panzoom
-- **Tooling:** Create React App, npm
+### Frontend
+
+[![Frontend](https://skills.syvixor.com/api/icons?i=react,js,html,css)](https://github.com/syvixor/skills-icons)
+
+- **React**
+- **JavaScript**
+- **HTML5**
+- **CSS3**
+
+### Parsing Engine
+
+[![Parser](https://skills.syvixor.com/api/icons?i=nodejs)](https://github.com/syvixor/skills-icons)
+
+- **node-sql-parser** (AST-based SQL parsing)
+
+### Visualization
+
+[![Visualization](https://skills.syvixor.com/api/icons?i=svg)](https://github.com/syvixor/skills-icons)
+
+- **Mermaid.js**
+- **html2canvas**
+- **panzoom**
+
+### Tooling
+
+[![Tooling](https://skills.syvixor.com/api/icons?i=npm)](https://github.com/syvixor/skills-icons)
+
+- **Create React App**
+- **npm**
 
 ---
 
@@ -97,8 +121,8 @@ erDiagram
 
 ### Prerequisites
 
-- Node.js 18+
-- npm 9+
+- <img src="https://skills.syvixor.com/api/icons?i=nodejs" width="20" alt="Node.js" /> **Node.js 18+**
+- <img src="https://skills.syvixor.com/api/icons?i=npm" width="20" alt="npm" /> **npm 9+**
 
 ---
 
@@ -191,7 +215,9 @@ GitHub: https://github.com/Chhatrapati-sahu-09
 
 ## License
 
-MIT License
+<img src="https://raw.githubusercontent.com/legacy-icons/license-icons/master/dist/32x32/mit.png" width="24" alt="MIT License" />
+
+**MIT License**
 
 ---
 
